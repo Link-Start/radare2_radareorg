@@ -394,7 +394,7 @@ R_API void r_core_anal_autoname_all_golang_fcns(RCore *core) {
 
 static bool check_string_at(RCore *core, ut64 addr) {
 	// TODO: improve with data analysis instead
-	const RVecFlagItemPtr *flags = r_flag_get_list (core->flags, addr);
+	const RVecFlagItemPtr *flags = r_flag_get_vec (core->flags, addr);
 	RFlagItem **iter;
 	RFlagItem *fi;
 	r_flag_item_vec_foreach (flags, iter, fi) {
@@ -1808,7 +1808,7 @@ static bool is_skippable_addr(RCore *core, ut64 addr) {
 	if (fcn->addr == addr) {
 		return true;
 	}
-	const RVecFlagItemPtr *flags = r_flag_get_list (core->flags, addr);
+	const RVecFlagItemPtr *flags = r_flag_get_vec (core->flags, addr);
 	RFlagItem **iter;
 	RFlagItem *flag;
 	r_flag_item_vec_foreach (flags, iter, flag) {

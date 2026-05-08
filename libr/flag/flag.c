@@ -18,7 +18,7 @@ static const char *str_callback(RNum *user, ut64 addr, bool *ok) {
 	}
 	if (user) {
 		RFlag *f = (RFlag*)user;
-		const RVecFlagItemPtr *list = r_flag_get_list (f, addr);
+		const RVecFlagItemPtr *list = r_flag_get_vec (f, addr);
 		RFlagItem *item = r_flag_item_vec_last (list);
 		if (item) {
 			if (ok) {
@@ -512,7 +512,7 @@ R_API bool r_flag_exist_at(RFlag *f, const char *flag_prefix, ut16 fp_size, ut64
 	if (f->mask) {
 		addr &= f->mask;
 	}
-	const RVecFlagItemPtr *list = r_flag_get_list (f, addr);
+	const RVecFlagItemPtr *list = r_flag_get_vec (f, addr);
 	RFlagItem **iter;
 	RFlagItem *fi;
 	r_flag_item_vec_foreach (list, iter, fi) {
@@ -537,7 +537,7 @@ R_API RFlagItem *r_flag_get_in(RFlag *f, ut64 addr) {
 	if (f->mask) {
 		addr &= f->mask;
 	}
-	const RVecFlagItemPtr *list = r_flag_get_list (f, addr);
+	const RVecFlagItemPtr *list = r_flag_get_vec (f, addr);
 	RFlagItem *item = r_flag_item_vec_last (list);
 	return item? evalFlag (f, item): NULL;
 }
@@ -550,7 +550,7 @@ R_API RFlagItem *r_flag_get_by_spaces(RFlag *f, bool prionospace, ut64 addr, ...
 		addr &= f->mask;
 	}
 
-	const RVecFlagItemPtr *list = r_flag_get_list (f, addr);
+	const RVecFlagItemPtr *list = r_flag_get_vec (f, addr);
 	RFlagItem *ret = NULL;
 	va_list ap, aq;
 
@@ -771,7 +771,7 @@ R_API RVecFlagItemPtr *r_flag_all_list(RFlag *f, bool by_space) {
 }
 
 /* return the list of flag items that are associated with a given offset */
-R_API const RVecFlagItemPtr* /*<RFlagItem*>*/ r_flag_get_list(RFlag *f, ut64 addr) {
+R_API const RVecFlagItemPtr* /*<RFlagItem*>*/ r_flag_get_vec(RFlag *f, ut64 addr) {
 	if (f->mask) {
 		addr &= f->mask;
 	}
@@ -783,7 +783,7 @@ R_API char *r_flag_get_liststr(RFlag *f, ut64 addr) {
 	if (f->mask) {
 		addr &= f->mask;
 	}
-	const RVecFlagItemPtr *list = r_flag_get_list (f, addr);
+	const RVecFlagItemPtr *list = r_flag_get_vec (f, addr);
 	RStrBuf *sb = r_strbuf_new ("");
 	RFlagItem **iter;
 	RFlagItem *fi;
@@ -1162,7 +1162,7 @@ R_API void r_flag_bind(RFlag *f, RFlagBind *fb) {
 	fb->exist_at = r_flag_exist_at;
 	fb->get = r_flag_get;
 	fb->get_at = r_flag_get_at;
-	fb->get_list = r_flag_get_list;
+	fb->get_vec = r_flag_get_vec;
 	fb->set = r_flag_set;
 	fb->unset = r_flag_unset;
 	fb->unset_name = r_flag_unset_name;

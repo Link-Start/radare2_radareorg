@@ -1854,7 +1854,7 @@ R_API char *r_core_anal_hasrefs_to_depth(RCore *core, ut64 value, PJ *pj, int de
 		if (pj) {
 			RFlagItem **iter;
 			RFlagItem *f;
-			const RVecFlagItemPtr *flags = r_flag_get_list (core->flags, value);
+			const RVecFlagItemPtr *flags = r_flag_get_vec (core->flags, value);
 			if (flags && !RVecFlagItemPtr_empty (flags)) {
 				pj_ka (pj, "flags");
 				r_flag_item_vec_foreach (flags, iter, f) {

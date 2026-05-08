@@ -3,7 +3,6 @@
 
 #include <r_types.h>
 #include <r_util.h>
-#include <r_list.h>
 #include <r_vec.h>
 #include <r_skiplist.h>
 
@@ -95,7 +94,7 @@ typedef bool (*RFlagExistAt)(RFlag *f, const char *flag_prefix, ut16 fp_size, ut
 typedef RFlagItem* (*RFlagGet)(RFlag *f, const char *name);
 typedef RFlagItem* (*RFlagGetAtAddr) (RFlag *f, bool prionospace, ut64);
 typedef RFlagItem* (*RFlagGetAt)(RFlag *f, ut64 addr, bool closest);
-typedef const RVecFlagItemPtr* (*RFlagGetList)(RFlag *f, ut64 addr);
+typedef const RVecFlagItemPtr* (*RFlagGetVec)(RFlag *f, ut64 addr);
 typedef RFlagItem* (*RFlagSet)(RFlag *f, const char *name, ut64 addr, ut32 size);
 typedef bool (*RFlagUnset)(RFlag *f, RFlagItem *item);
 typedef bool (*RFlagUnsetName)(RFlag *f, const char *name);
@@ -112,7 +111,7 @@ typedef struct r_flag_bind_t {
 	RFlagExistAt exist_at;
 	RFlagGet get;
 	RFlagGetAt get_at;
-	RFlagGetList get_list;
+	RFlagGetVec get_vec;
 	RFlagSet set;
 	RFlagUnset unset;
 	RFlagUnsetName unset_name;
@@ -142,7 +141,7 @@ R_API RFlagItem *r_flag_get_at(RFlag *f, ut64 addr, bool closest);
 R_API RFlagItem *r_flag_closest_in_space(RFlag *f, const char *space, ut64 addr, ut64 radius);
 R_API RFlagItem *r_flag_closest_with_prefix(RFlag *f, const char *pfx, ut64 addr, ut64 radius);
 R_API RVecFlagItemPtr *r_flag_all_list(RFlag *f, bool by_space);
-R_API const RVecFlagItemPtr* /*<RFlagItem*>*/ r_flag_get_list(RFlag *f, ut64 addr);
+R_API const RVecFlagItemPtr* /*<RFlagItem*>*/ r_flag_get_vec(RFlag *f, ut64 addr);
 R_API char *r_flag_get_liststr(RFlag *f, ut64 addr);
 R_API bool r_flag_unset(RFlag *f, RFlagItem *item);
 R_API bool r_flag_unset_name(RFlag *f, const char *name);

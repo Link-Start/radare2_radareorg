@@ -238,7 +238,7 @@ static void draw_level1_boxes(RVMatrix *rvm) {
 	} else if (!strcmp (cat, "flags")) {
 		RFlagItem **iter;
 		RFlagItem *flag;
-		const RVecFlagItemPtr *flags = r_flag_get_list (rvm->core->flags, 0);
+		const RVecFlagItemPtr *flags = r_flag_get_vec (rvm->core->flags, 0);
 		r_flag_item_vec_foreach (flags, iter, flag) {
 			if (item_count >= max_items) {
 				break;
@@ -843,7 +843,7 @@ R_API void r_core_visual_matrix(RCore *core) {
 					} else if (!strcmp (cat, "flags")) {
 						RFlagItem **iter;
 						RFlagItem *flag;
-						const RVecFlagItemPtr *flags = r_flag_get_list (rvm.core->flags, 0);
+						const RVecFlagItemPtr *flags = r_flag_get_vec (rvm.core->flags, 0);
 						int count = 0;
 						r_flag_item_vec_foreach (flags, iter, flag) {
 							if (count == rvm.selected_item) {
@@ -936,7 +936,7 @@ R_API void r_core_visual_matrix(RCore *core) {
 					} else if (!strcmp (cat, "flags")) {
 						RFlagItem **iter;
 						RFlagItem *flag;
-						const RVecFlagItemPtr *flags = r_flag_get_list (rvm.core->flags, 0);
+						const RVecFlagItemPtr *flags = r_flag_get_vec (rvm.core->flags, 0);
 						int count = 0;
 						r_flag_item_vec_foreach (flags, iter, flag) {
 							if (count == rvm.selected_item) {
@@ -1007,7 +1007,7 @@ R_API void r_core_visual_matrix(RCore *core) {
 						max_items++;
 					}
 				} else if (!strcmp (cat, "flags")) {
-					max_items = r_flag_item_vec_length (r_flag_get_list (rvm.core->flags, 0));
+					max_items = r_flag_item_vec_length (r_flag_get_vec (rvm.core->flags, 0));
 				} else if (!strcmp (cat, "symbols")) {
 					const RList *symbols = r_bin_get_symbols (rvm.core->bin);
 					max_items = r_list_length (symbols);
@@ -1077,7 +1077,7 @@ R_API void r_core_visual_matrix(RCore *core) {
 							max_items++;
 						}
 					} else if (!strcmp (cat, "flags")) {
-						max_items = r_flag_item_vec_length (r_flag_get_list (rvm.core->flags, 0));
+						max_items = r_flag_item_vec_length (r_flag_get_vec (rvm.core->flags, 0));
 					} else if (!strcmp (cat, "symbols")) {
 						const RList *symbols = r_bin_get_symbols (rvm.core->bin);
 						max_items = r_list_length (symbols);
@@ -1252,7 +1252,7 @@ R_API void r_core_visual_matrix(RCore *core) {
 									} else if (!strcmp (cat, "flags")) {
 										RFlagItem **iter;
 										RFlagItem *flag;
-										const RVecFlagItemPtr *flags = r_flag_get_list (rvm.core->flags, 0);
+										const RVecFlagItemPtr *flags = r_flag_get_vec (rvm.core->flags, 0);
 										int count = 0;
 										r_flag_item_vec_foreach (flags, iter, flag) {
 											if (count == rvm.selected_item) {

@@ -1022,7 +1022,7 @@ static void cmd_fd_dot(RCore *core, const char *input) {
 	if (arg) {
 		addr = r_num_math (core->num, arg + 1);
 	}
-	const RVecFlagItemPtr *flaglist = r_flag_get_list (core->flags, addr);
+	const RVecFlagItemPtr *flaglist = r_flag_get_vec (core->flags, addr);
 	bool isJson = strchr (input, 'j') != NULL;
 	PJ *pj = isJson? r_core_pj_new (core): NULL;
 	if (pj) {
@@ -1979,7 +1979,7 @@ static int cmd_flag(void *data, const char *input) {
 			bool rad = input[1] && input[2] == '*';
 			RFlagItem **viter;
 			if (input[1]) {
-				const RVecFlagItemPtr *list = r_flag_get_list (core->flags, core->addr);
+				const RVecFlagItemPtr *list = r_flag_get_vec (core->flags, core->addr);
 				r_flag_item_vec_foreach (list, viter, fi) {
 					print_flag_color (core, fi, rad);
 				}
@@ -2001,7 +2001,7 @@ static int cmd_flag(void *data, const char *input) {
 				RVecFlagItemPtr_free (list);
 			} else {
 				RFlagItem **iter;
-				const RVecFlagItemPtr *list = r_flag_get_list (core->flags, addr);
+				const RVecFlagItemPtr *list = r_flag_get_vec (core->flags, addr);
 				r_flag_item_vec_foreach (list, iter, fi) {
 					r_flag_item_set_color (core->flags, fi, "");
 				}
@@ -2041,7 +2041,7 @@ static int cmd_flag(void *data, const char *input) {
 					R_LOG_ERROR ("Unknown flag '%s'", arg);
 				}
 			} else {
-				const RVecFlagItemPtr *list = r_flag_get_list (core->flags, core->addr);
+				const RVecFlagItemPtr *list = r_flag_get_vec (core->flags, core->addr);
 				char *color = r_str_trim_dup (input + 2);
 				RFlagItem **iter;
 				RFlagItem *fi;
@@ -2196,7 +2196,7 @@ static int cmd_flag(void *data, const char *input) {
 		}
 		if (input[0] && input[1] == '.') {
 			const int mode = input[2];
-			const RVecFlagItemPtr *list = r_flag_get_list (core->flags, core->addr);
+			const RVecFlagItemPtr *list = r_flag_get_vec (core->flags, core->addr);
 			PJ *pj = NULL;
 			if (mode == 'j') {
 				pj = r_core_pj_new (core);

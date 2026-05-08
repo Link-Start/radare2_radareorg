@@ -1519,7 +1519,7 @@ static bool step_until_flag(RCore *core, const char *instr) {
 				break;
 			}
 		}
-		const RVecFlagItemPtr *list = r_flag_get_list (core->flags, pc);
+		const RVecFlagItemPtr *list = r_flag_get_vec (core->flags, pc);
 		RFlagItem **viter;
 		r_flag_item_vec_foreach (list, viter, f) {
 			if (R_STR_ISEMPTY (instr) || (f->realname && strstr (f->realname, instr))) {

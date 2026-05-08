@@ -2828,7 +2828,7 @@ static void annotated_hexdump(RCore *core, const char *str, int len) {
 					r_cons_printf (core->cons, "/fcn.%s\n", fcn->name);
 				}
 			}
-			const RVecFlagItemPtr *list = r_flag_get_list (core->flags, addr + j);
+			const RVecFlagItemPtr *list = r_flag_get_vec (core->flags, addr + j);
 			RFlagItem **iter;
 			RFlagItem *fi;
 			ut64 flagsize = 0;

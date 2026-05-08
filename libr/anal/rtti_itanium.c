@@ -454,7 +454,7 @@ static RTypeInfoType rtti_itanium_type_info_type_from_flag(RVTableContext *conte
 	R_RETURN_VAL_IF_FAIL (core, R_TYPEINFO_TYPE_CLASS);
 
 	// get the reloc flags
-	const RVecFlagItemPtr *flags = context->anal->flb.get_list (core->flags, atAddress);
+	const RVecFlagItemPtr *flags = context->anal->flb.get_vec (core->flags, atAddress);
 	if (!flags) {
 		return R_TYPEINFO_TYPE_UNKNOWN;
 	}

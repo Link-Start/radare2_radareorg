@@ -17,7 +17,7 @@ static inline const char *get_xrefname(RCore *core, ut64 addr) {
 }
 
 static const char *get_refname(RCore *core, ut64 addr) {
-	const RVecFlagItemPtr *list = r_flag_get_list (core->flags, addr);
+	const RVecFlagItemPtr *list = r_flag_get_vec (core->flags, addr);
 	RFlagItem **iter;
 	RFlagItem *item;
 	r_flag_item_vec_foreach (list, iter, item) {
@@ -69,7 +69,7 @@ static RFlagItem *get_sym_flag_at(RCore *core, ut64 addr) {
 	if (!core || !core->flags) {
 		return NULL;
 	}
-	const RVecFlagItemPtr *list = r_flag_get_list (core->flags, addr);
+	const RVecFlagItemPtr *list = r_flag_get_vec (core->flags, addr);
 	RFlagItem **it;
 	RFlagItem *fi;
 	r_flag_item_vec_foreach (list, it, fi) {

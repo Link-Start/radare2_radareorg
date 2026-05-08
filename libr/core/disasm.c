@@ -1326,7 +1326,7 @@ static void ds_build_op_str(RDisasmState *ds, bool print_color) {
 				e = strdup (e);
 				ut64 addr = r_num_get (NULL, ox);
 				if (addr > ds->min_ref_addr) {
-					const RVecFlagItemPtr *ls = r_flag_get_list (ds->core->flags, addr);
+					const RVecFlagItemPtr *ls = r_flag_get_vec (ds->core->flags, addr);
 					RFlagItem *fi;
 					RFlagItem **iter;
 					r_flag_item_vec_foreach (ls, iter, fi) {
@@ -1517,7 +1517,7 @@ static void ds_show_refs(RDisasmState *ds) {
 	RAnalRef *ref;
 	R_VEC_FOREACH (refs, ref) {
 		const char *cmt = r_meta_get_string (ds->core->anal, R_META_TYPE_COMMENT, ref->addr);
-		const RVecFlagItemPtr *fls = r_flag_get_list (ds->core->flags, ref->addr);
+		const RVecFlagItemPtr *fls = r_flag_get_vec (ds->core->flags, ref->addr);
 		RFlagItem **iter2;
 		RFlagItem *fis;
 		r_flag_item_vec_foreach (fls, iter2, fis) {
@@ -2785,7 +2785,7 @@ static bool ds_show_flags(RDisasmState *ds, bool overlapped) {
 	ut64 switch_addr = UT64_MAX;
 	int case_start = -1, case_prev = 0, case_current = 0;
 	RAnalFunction *f = r_anal_get_function_at (ds->core->anal, ds->at);
-	const RVecFlagItemPtr *flaglist = r_flag_get_list (core->flags, ds->at);
+	const RVecFlagItemPtr *flaglist = r_flag_get_vec (core->flags, ds->at);
 	RVecFlagItemPtr *uniqlist = custom_sorted_flags (flaglist);
 	const char *ellipsis = r_print_ellipsis (core->print, NULL, NULL);
 	int count = 0;
@@ -3735,7 +3735,7 @@ static bool ds_print_data_type(RDisasmState *ds, const ut8 *obuf, int ib, int si
 			}
 		}
 		if (n >= ds->min_ref_addr) {
-			const RVecFlagItemPtr *flags = r_flag_get_list (core->flags, n);
+			const RVecFlagItemPtr *flags = r_flag_get_vec (core->flags, n);
 			RFlagItem **iter;
 			RFlagItem *fi;
 			r_flag_item_vec_foreach (flags, iter, fi) {
@@ -6278,7 +6278,7 @@ static void ds_print_comments_right(RDisasmState *ds) {
 		mi = NULL;
 	}
 	if (ds->asm_flags_right) {
-		const RVecFlagItemPtr *flaglist = r_flag_get_list (core->flags, ds->at);
+		const RVecFlagItemPtr *flaglist = r_flag_get_vec (core->flags, ds->at);
 		RFlagItem *fi;
 		RFlagItem **iter;
 		if (flaglist && !RVecFlagItemPtr_empty (flaglist)) {
@@ -7947,7 +7947,7 @@ R_IPI int r_core_print_disasm_json_ipi(RCore *core, ut64 addr, ut8 *buf, int nb_
 		}
 		/* add flags */
 		{
-			const RVecFlagItemPtr *flags = r_flag_get_list (core->flags, at);
+			const RVecFlagItemPtr *flags = r_flag_get_vec (core->flags, at);
 			RFlagItem *flag;
 			RFlagItem **iter;
 			if (flags && !RVecFlagItemPtr_empty (flags)) {

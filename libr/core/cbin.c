@@ -2544,7 +2544,7 @@ static char *unique_symflag_for_addr(RCore *core, const char *pfx, const char *l
 	if (!base) {
 		return NULL;
 	}
-	const RVecFlagItemPtr *lst = r_flag_get_list (core->flags, vaddr);
+	const RVecFlagItemPtr *lst = r_flag_get_vec (core->flags, vaddr);
 	if (lst) {
 		RFlagItem *match = NULL;
 		RFlagItem *firstsym = NULL;
@@ -2638,7 +2638,7 @@ static void set_symbol_flag(RCore *core, RBinSymbol *symbol, const SymName *sn, 
 		return;
 	}
 	if (IS_MODE_RAD (mode) && r_str_startswith (fn, "sym.")) {
-		const RVecFlagItemPtr *lst = r_flag_get_list (core->flags, addr);
+		const RVecFlagItemPtr *lst = r_flag_get_vec (core->flags, addr);
 		if (lst) {
 			RFlagItem *fi;
 			RFlagItem **it;
@@ -3010,7 +3010,7 @@ static bool bin_symbols(RCore *core, PJ *pj, int mode, ut64 laddr, int va, ut64 
 				/* Ignore duplicate sym.* names if the target address already holds one. */
 				if (IS_MODE_RAD (mode) && r_str_startswith (fn, "sym.")) {
 					RFlagItem *fi_at = NULL;
-					const RVecFlagItemPtr *lst = r_flag_get_list (core->flags, addr);
+					const RVecFlagItemPtr *lst = r_flag_get_vec (core->flags, addr);
 					if (lst) {
 						RFlagItem **it;
 						RFlagItem *fi;
